@@ -1,4 +1,6 @@
 import React from "react";
+// ScrollView -> serve pra quando temos poucos elementos em tela
+// ela já joga tudo na tela
 import { ScrollView } from "react-native";
 
 import { Category } from "../Category";
