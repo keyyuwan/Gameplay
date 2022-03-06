@@ -10,18 +10,7 @@ export const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
   },
-  iconWrapper: {
-    width: 56,
-    height: 56,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRightWidth: 1,
-    borderColor: theme.colors.line,
-  },
-  icon: {
-    height: 18,
-    width: 24,
-  },
+
   title: {
     flex: 1,
     color: theme.colors.heading,

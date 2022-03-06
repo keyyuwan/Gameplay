@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // FlatList -> serve pra quando temos muitos elementos em tela
 // renderiza aos poucos
 import { View, FlatList } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 import { Profile } from "../../components/Profile";
 import { ButtonAdd } from "../../components/ButtonAdd";
@@ -9,11 +10,14 @@ import { CategorySelect } from "../../components/CategorySelect";
 import { ListHeader } from "../../components/ListHeader";
 import { Appointment } from "../../components/Appointment";
 import { ListDivider } from "../../components/ListDivider";
+import { Background } from "../../components/Background";
 
 import { styles } from "./style";
 
 export function Home() {
   const [category, setCategory] = useState("");
+
+  const navigation = useNavigation();
 
   const appointments = [
     {
@@ -48,11 +52,19 @@ export function Home() {
     categoryId === category ? setCategory("") : setCategory(categoryId);
   }
 
+  function handleAppointmentDetails() {
+    navigation.navigate("AppointmentDetails" as any);
+  }
+
+  function handleAppointmentCreate() {
+    navigation.navigate("AppointmentCreate" as any);
+  }
+
   return (
-    <View>
+    <Background>
       <View style={styles.header}>
         <Profile />
-        <ButtonAdd />
+        <ButtonAdd onPress={handleAppointmentCreate} />
       </View>
 
       <CategorySelect
@@ -66,12 +78,14 @@ export function Home() {
         <FlatList
           data={appointments}
           keyExtractor={(item) => item.id}
-          renderItem={({ item }) => <Appointment data={item} />}
+          renderItem={({ item }) => (
+            <Appointment onPress={handleAppointmentDetails} data={item} />
+          )}
           style={styles.matches}
           showsVerticalScrollIndicator={false}
           ItemSeparatorComponent={() => <ListDivider />}
         />
       </View>
-    </View>
+    </Background>
   );
 }
